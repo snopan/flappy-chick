@@ -18,5 +18,6 @@ fn main() {
         .add_systems(Update, animate_sprite)
         .add_systems(Update, gravity)
         .add_systems(Update, velocity)
+        .add_systems(Update, flight_rotation)
         .run()
 }
