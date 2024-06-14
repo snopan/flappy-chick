@@ -1,11 +1,12 @@
+use crate::entities::*;
 use bevy::prelude::*;
-use bevy::asset::AssetServer;
-
-use crate::entities::create_player;
 
 pub fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
+    mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>
 ) {
-    create_player(&mut commands, &asset_server);
+
+    commands.spawn(Camera2dBundle::default());
+    create_player(&mut commands, &asset_server, &mut texture_atlas_layouts);
 }
