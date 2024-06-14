@@ -8,6 +8,7 @@ pub fn create_player(
         SpriteSheetBundle { ..Default::default() },
         Animator { ..Default::default() },
         Animation::PlayerFall,
-        UpdateAnimation(true)
+        UpdateAnimation(true),
+        Player
     ));
 }

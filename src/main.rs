@@ -13,6 +13,7 @@ fn main() {
         .init_resource::<resources::Animations>()
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
         .add_systems(Startup, setup)
+        .add_systems(Update, input)
         .add_systems(Update, animation_update)
         .add_systems(Update, animate_sprite)
         .run()

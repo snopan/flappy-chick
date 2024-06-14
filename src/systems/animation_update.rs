@@ -1,4 +1,5 @@
-use crate::{components::*, Animations};
+use crate::components::*;
+use crate::resources::*;
 use bevy::prelude::*;
 
 pub fn animation_update(
