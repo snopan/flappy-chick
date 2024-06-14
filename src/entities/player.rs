@@ -17,8 +17,7 @@ pub fn create_player(
             ..Default::default()
         },
         Animator { ..Default::default() },
-        Animation::PlayerFall,
-        UpdateAnimation(true),
+        AnimationState::UpdateTo(Animation::PlayerFall),
         Velocity{
             x: 0.0,
             y: 0.0,

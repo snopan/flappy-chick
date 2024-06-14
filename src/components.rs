@@ -15,15 +15,18 @@ pub struct PipeSize {
 #[derive(Component)]
 pub struct Player;
 
-#[derive(Component, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Component)]
+pub enum AnimationState{
+    Animating,
+    UpdateTo(Animation)
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Animation {
     PlayerFall,
     PlayerFly,
     PlayerDie,
 }
-
-#[derive(Component)]
-pub struct UpdateAnimation(pub bool);
 
 #[derive(Component)]
 pub struct Animator {
