@@ -1,9 +1,9 @@
 use bevy::prelude::*;
 
 #[derive(Component)]
-pub struct Position {
-    pub x: usize,
-    pub y: usize,
+pub struct Velocity {
+    pub x: f32,
+    pub y: f32,
 }
 
 #[derive(Component)]
