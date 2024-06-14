@@ -15,12 +15,7 @@ pub struct PipeSize {
 #[derive(Component)]
 pub struct Player;
 
-#[derive(Component)]
-pub enum AnimationState {
-    Animating(Animation),
-    ChangeTo(Animation),
-}
-
+#[derive(Component, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Animation {
     PlayerFall,
     PlayerFly,
@@ -28,7 +23,19 @@ pub enum Animation {
 }
 
 #[derive(Component)]
+pub struct UpdateAnimation(pub bool);
+
+#[derive(Component)]
 pub struct Animator {
     pub timer: Timer,
     pub num_frames: usize
+}
+
+impl Default for Animator {
+    fn default() -> Self {
+        Animator{
+            timer: Timer::from_seconds(0.0, TimerMode::Once),
+            num_frames: 0,
+        }
+    }
 }
