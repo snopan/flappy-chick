@@ -1,4 +1,5 @@
+mod border;
 mod ground;
 mod player;
 
-pub use self::{ground::*, player::*};
+pub use self::{border::*, ground::*, player::*};

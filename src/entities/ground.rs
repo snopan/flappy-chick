@@ -1,30 +1,29 @@
-use core::num;
-
 use crate::components::*;
 use bevy::prelude::*;
 
 const TILE_SIZE: f32 = 15.0;
+const GAME_WIDTH: f32 = 300.0;
+const GAME_HEIGHT: f32 = 600.0;
 
 pub fn create_ground(
     commands: &mut Commands,
     texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>,
     asset_server: &Res<AssetServer>,
-    window: &Window,
 ) {
-    let window_left = -window.width() / 2.0;
-    let window_bottom = -window.height() / 2.0;
+    let window_left = -GAME_WIDTH / 2.0;
+    let window_bottom = -GAME_HEIGHT / 2.0;
     let ground_y = window_bottom + TILE_SIZE / 2.0 * (1.5);
 
     commands.spawn((
         Transform::from_xyz(0.0, ground_y, 0.0),
         BoxCollider {
-            width: window.width(),
+            width: GAME_WIDTH,
             height: TILE_SIZE,
         },
     ));
 
     println!("{}", ground_y);
-    let num_ground = (window.width() / TILE_SIZE).ceil() as isize;
+    let num_ground = (GAME_WIDTH / TILE_SIZE).ceil() as isize;
     for i in 0..num_ground {
         // println!("{}", window_left + (0.5 + i as f32) * TILE_SIZE);
         create_ground_tile(

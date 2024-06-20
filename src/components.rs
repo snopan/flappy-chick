@@ -16,6 +16,9 @@ pub struct BoxCollider {
 pub struct Player;
 
 #[derive(Component)]
+pub struct Border;
+
+#[derive(Component)]
 pub struct Ground {
     pub last: bool,
 }

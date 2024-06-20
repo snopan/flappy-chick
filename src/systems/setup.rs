@@ -14,10 +14,6 @@ pub fn setup(
 
     animations.load(&asset_server, &mut texture_atlas_layouts);
     create_player(&mut commands);
-    create_ground(
-        &mut commands,
-        &mut texture_atlas_layouts,
-        &asset_server,
-        window,
-    )
+    create_ground(&mut commands, &mut texture_atlas_layouts, &asset_server);
+    create_border(&mut commands, window);
 }
