@@ -1,3 +1,3 @@
 mod animations;
 
-pub use self::{animations::*};
+pub use self::animations::*;

@@ -6,7 +6,7 @@ const MASS: f32 = 10.0;
 
 pub fn gravity(
     time: Res<Time>,
-    mut query: Query<(&mut Velocity, &mut AnimationState), With<Player>>
+    mut query: Query<(&mut Velocity, &mut AnimationState), With<Player>>,
 ) {
     for (mut velocity, mut animation_state) in &mut query {
         let old_velocity = velocity.y;

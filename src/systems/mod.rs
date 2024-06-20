@@ -1,17 +1,12 @@
-mod setup;
 mod animate;
 mod animation_update;
-mod input;
-mod gravity;
-mod velocity;
 mod flight_rotation;
+mod gravity;
+mod input;
+mod setup;
+mod velocity;
 
 pub use self::{
-    setup::*,
-    animate::*,
-    animation_update::*,
-    input::*,
-    gravity::*,
+    animate::*, animation_update::*, flight_rotation::*, gravity::*, input::*, setup::*,
     velocity::*,
-    flight_rotation::*
 };

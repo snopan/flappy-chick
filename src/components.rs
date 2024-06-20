@@ -7,18 +7,23 @@ pub struct Velocity {
 }
 
 #[derive(Component)]
-pub struct PipeSize {
-    pub width: usize,
-    pub height: usize,
+pub struct BoxCollider {
+    pub width: f32,
+    pub height: f32,
 }
 
 #[derive(Component)]
 pub struct Player;
 
 #[derive(Component)]
-pub enum AnimationState{
+pub struct Ground {
+    pub last: bool,
+}
+
+#[derive(Component)]
+pub enum AnimationState {
     Animating,
-    UpdateTo(Animation)
+    UpdateTo(Animation),
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
@@ -31,12 +36,12 @@ pub enum Animation {
 #[derive(Component)]
 pub struct Animator {
     pub timer: Timer,
-    pub num_frames: usize
+    pub num_frames: usize,
 }
 
 impl Default for Animator {
     fn default() -> Self {
-        Animator{
+        Animator {
             timer: Timer::from_seconds(0.0, TimerMode::Once),
             num_frames: 0,
         }
