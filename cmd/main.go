@@ -5,6 +5,10 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/snopan/flappy-chick/animation"
+	"github.com/snopan/flappy-chick/drawable"
+	"github.com/snopan/flappy-chick/spritesheet"
+	"github.com/snopan/flappy-chick/system"
 	"github.com/yohamta/donburi"
 )
 
@@ -28,8 +32,13 @@ func NewGame() *Game {
 		bounds: image.Rectangle{},
 		world:  donburi.NewWorld(),
 	}
-	g.systems = []System{}
-	g.drawables = []Drawable{}
+	g.systems = []System{
+		system.NewSpawn(),
+		system.NewAnimation(),
+	}
+	g.drawables = []Drawable{
+		drawable.NewRender(),
+	}
 	return g
 }
 
@@ -55,8 +64,17 @@ func (g *Game) Layout(width, height int) (int, int) {
 func main() {
 	ebiten.SetWindowSize(800, 600)
 	ebiten.SetWindowSizeLimits(300, 200, -1, -1)
-	ebiten.SetVsyncEnabled(true)
+	ebiten.SetTPS(60)
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeDisabled)
+
+	if err := spritesheet.InitSpriteSheetLibrary(); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := animation.InitAnimationLibrary(); err != nil {
+		log.Fatal(err)
+	}
+
 	if err := ebiten.RunGame(NewGame()); err != nil {
 		log.Fatal(err)
 	}
