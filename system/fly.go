@@ -2,6 +2,7 @@ package system
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/snopan/flappy-chick/component"
 	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
@@ -20,7 +21,7 @@ func NewFly() *Fly {
 
 func (f *Fly) Update(w donburi.World) {
 	f.query.Each(w, func(e *donburi.Entry) {
-		if !ebiten.IsKeyPressed(ebiten.KeySpace) {
+		if !inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			return
 		}
 

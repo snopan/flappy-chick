@@ -30,7 +30,7 @@ var animationData = map[AnimationKey]struct {
 	},
 	PlayerFly: {
 		spriteSheetKey: spritesheet.ChickenFly,
-		frameDuration:  3,
+		frameDuration:  5,
 	},
 }
 
