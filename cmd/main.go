@@ -38,6 +38,7 @@ func NewGame() *Game {
 		system.NewAnimation(),
 		system.NewGravity(),
 		system.NewVelocity(),
+		system.NewFly(),
 	}
 	g.drawables = []Drawable{
 		drawable.NewRender(),
