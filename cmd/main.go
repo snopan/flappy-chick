@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/snopan/flappy-chick/animation"
 	"github.com/snopan/flappy-chick/drawable"
+	"github.com/snopan/flappy-chick/options"
 	"github.com/snopan/flappy-chick/spritesheet"
 	"github.com/snopan/flappy-chick/system"
 	"github.com/yohamta/donburi"
@@ -35,6 +36,8 @@ func NewGame() *Game {
 	g.systems = []System{
 		system.NewSpawn(),
 		system.NewAnimation(),
+		system.NewGravity(),
+		system.NewVelocity(),
 	}
 	g.drawables = []Drawable{
 		drawable.NewRender(),
@@ -62,9 +65,7 @@ func (g *Game) Layout(width, height int) (int, int) {
 }
 
 func main() {
-	ebiten.SetWindowSize(800, 600)
-	ebiten.SetWindowSizeLimits(300, 200, -1, -1)
-	ebiten.SetTPS(60)
+	ebiten.SetWindowSize(options.WindowWidth, options.WindowHeight)
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeDisabled)
 
 	if err := spritesheet.InitSpriteSheetLibrary(); err != nil {

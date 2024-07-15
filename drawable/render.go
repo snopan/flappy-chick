@@ -13,7 +13,7 @@ type Render struct {
 
 func NewRender() *Render {
 	return &Render{
-		query: donburi.NewQuery(filter.Contains(component.Sprite)),
+		query: donburi.NewQuery(filter.Contains(component.Sprite, component.Transform)),
 	}
 }
 
@@ -24,7 +24,11 @@ func (r *Render) Draw(w donburi.World, screen *ebiten.Image) {
 			return
 		}
 
+		transform := component.Transform.Get(e)
 		op := &ebiten.DrawImageOptions{}
+		op.GeoM.Translate(transform.Position.X/transform.Scale.X, transform.Position.Y/transform.Scale.Y)
+		op.GeoM.Scale(transform.Scale.X, transform.Scale.Y)
+
 		screen.DrawImage(sprite.Image, op)
 	})
 }
