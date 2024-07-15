@@ -30,12 +30,15 @@ func CreatePlayer(w donburi.World) {
 	donburi.SetValue(
 		e, component.Transform, component.TransformData{
 			Position: component.PositionData{
-				X: options.WindowWidth/2 - 20*options.PlayerScale,
-				Y: options.WindowHeight/2 - 20*options.PlayerScale,
+				X: options.WindowWidth / 2,
+				Y: options.WindowHeight / 2,
 			},
 			Scale: component.ScaleData{
 				X: options.PlayerScale,
 				Y: options.PlayerScale,
+			},
+			Rotation: component.RotationData{
+				Theta: 0,
 			},
 		})
 	donburi.SetValue(

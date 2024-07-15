@@ -40,6 +40,7 @@ func NewGame() *Game {
 		system.NewVelocity(),
 		system.NewInput(),
 		system.NewPlayerAnimator(),
+		system.NewTilt(),
 	}
 	g.drawables = []Drawable{
 		drawable.NewRender(),

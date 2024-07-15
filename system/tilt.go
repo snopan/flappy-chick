@@ -2,6 +2,7 @@ package system
 
 import (
 	"github.com/snopan/flappy-chick/component"
+	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/filter"
 )
@@ -21,5 +22,14 @@ func (t *Tilt) Update(w donburi.World) {
 		velocity := component.Velocity.Get(e)
 		transform := component.Transform.Get(e)
 
+		currentVelocity := velocity.Y
+		if currentVelocity > 0 {
+			currentVelocity = min(currentVelocity, options.MaxTiltVelocity)
+		} else {
+			currentVelocity = max(currentVelocity, -options.MaxTiltVelocity)
+		}
+
+		angle := options.MaxTiltAngle / options.MaxTiltVelocity * currentVelocity
+		transform.Rotation.Theta = angle
 	})
 }
