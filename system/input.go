@@ -9,17 +9,17 @@ import (
 	"github.com/yohamta/donburi/filter"
 )
 
-type Fly struct {
+type Input struct {
 	query *donburi.Query
 }
 
-func NewFly() *Fly {
-	return &Fly{
+func NewInput() *Input {
+	return &Input{
 		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Velocity)),
 	}
 }
 
-func (f *Fly) Update(w donburi.World) {
+func (f *Input) Update(w donburi.World) {
 	f.query.Each(w, func(e *donburi.Entry) {
 		if !inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 			return

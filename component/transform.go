@@ -5,6 +5,7 @@ import "github.com/yohamta/donburi"
 type TransformData struct {
 	Position PositionData
 	Scale    ScaleData
+	Rotation RotationData
 }
 
 type PositionData struct {
@@ -13,6 +14,10 @@ type PositionData struct {
 
 type ScaleData struct {
 	X, Y float64
+}
+
+type RotationData struct {
+	Theta float64
 }
 
 var Transform = donburi.NewComponentType[TransformData]()
