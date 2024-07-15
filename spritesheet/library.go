@@ -17,14 +17,18 @@ const (
 	ChickenDie SpriteSheetKey = iota
 	ChickenFall
 	ChickenFly
+	Pipes
+	Ground
 )
 
 var spriteSheetData = map[SpriteSheetKey]struct {
-	src         string
-	frameWidth  int
-	frameHeight int
-	rows        int
-	cols        int
+	src          string
+	frameWidth   int
+	frameHeight  int
+	offsetWidth  int
+	offsetHeight int
+	rows         int
+	cols         int
 }{
 	ChickenDie: {
 		src:         "assets/images/chicken_die.png",
@@ -47,6 +51,21 @@ var spriteSheetData = map[SpriteSheetKey]struct {
 		rows:        1,
 		cols:        4,
 	},
+	Pipes: {
+		src:         "assets/images/terrain.png",
+		frameWidth:  32,
+		frameHeight: 16,
+		rows:        3,
+		cols:        4,
+	},
+	Ground: {
+		src:          "assets/images/terrain.png",
+		frameWidth:   16,
+		frameHeight:  16,
+		offsetHeight: 48,
+		rows:         3,
+		cols:         4,
+	},
 }
 
 func InitSpriteSheetLibrary() error {
@@ -66,6 +85,8 @@ func InitSpriteSheetLibrary() error {
 			ebitenImage,
 			data.frameWidth,
 			data.frameHeight,
+			data.offsetWidth,
+			data.offsetHeight,
 			data.rows,
 			data.cols,
 		)

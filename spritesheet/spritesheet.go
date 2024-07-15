@@ -9,14 +9,16 @@ import (
 )
 
 type SpriteSheet struct {
-	image       *ebiten.Image
-	frameWidth  int
-	frameHeight int
-	rows        int
-	cols        int
+	image        *ebiten.Image
+	frameWidth   int
+	frameHeight  int
+	offsetWidth  int
+	offsetHeight int
+	rows         int
+	cols         int
 }
 
-func NewSpriteSheet(image *ebiten.Image, frameWidth, frameHeight, rows, cols int) (*SpriteSheet, error) {
+func NewSpriteSheet(image *ebiten.Image, frameWidth, frameHeight, offsetWidth, offsetHeight, rows, cols int) (*SpriteSheet, error) {
 	if image == nil {
 		return nil, errors.New("empty image")
 	}
@@ -30,11 +32,13 @@ func NewSpriteSheet(image *ebiten.Image, frameWidth, frameHeight, rows, cols int
 	}
 
 	return &SpriteSheet{
-		image:       image,
-		frameWidth:  frameWidth,
-		frameHeight: frameHeight,
-		rows:        rows,
-		cols:        cols,
+		image:        image,
+		frameWidth:   frameWidth,
+		frameHeight:  frameHeight,
+		offsetWidth:  offsetWidth,
+		offsetHeight: offsetHeight,
+		rows:         rows,
+		cols:         cols,
 	}, nil
 }
 
@@ -47,7 +51,7 @@ func (s *SpriteSheet) GetFrame(row, col int) (*ebiten.Image, error) {
 		return nil, fmt.Errorf("col %d is out of range", col)
 	}
 
-	sx, sy := col*s.frameWidth, row*s.frameHeight
+	sx, sy := col*s.frameWidth+s.offsetWidth, row*s.frameHeight+s.offsetHeight
 	return s.image.SubImage(image.Rect(sx, sy, sx+s.frameWidth, sy+s.frameHeight)).(*ebiten.Image), nil
 }
 
