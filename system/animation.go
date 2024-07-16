@@ -41,12 +41,7 @@ func changeAnimation(a *component.AnimationData) {
 		return
 	}
 
-	newSheet, ok := animation.AnimationLibrary[a.NextAnimation]
-	if !ok {
-		panic(fmt.Sprintf("invalid animation key: %d", a.NextAnimation))
-	}
-
-	a.CurrentSheet = newSheet
+	a.CurrentSheet = animation.GetAnimation(a.NextAnimation)
 	a.CurrentFrame = 0
 
 	a.ShouldChange = false

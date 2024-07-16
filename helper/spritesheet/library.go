@@ -11,7 +11,7 @@ import (
 
 type SpriteSheetKey int
 
-var SpriteSheetLibrary = map[SpriteSheetKey]*SpriteSheet{}
+var spriteSheetLibrary = map[SpriteSheetKey]*SpriteSheet{}
 
 const (
 	ChickenDie SpriteSheetKey = iota
@@ -94,10 +94,19 @@ func InitSpriteSheetLibrary() error {
 			return fmt.Errorf("failed to create sprite %d: %w", key, err)
 		}
 
-		SpriteSheetLibrary[key] = spriteSheet
+		spriteSheetLibrary[key] = spriteSheet
 
 		f.Close()
 	}
 
 	return nil
+}
+
+func GetSpriteSheet(key SpriteSheetKey) *SpriteSheet {
+	spriteSheet, ok := spriteSheetLibrary[key]
+	if !ok {
+		panic(fmt.Sprintf("failed to get sprite sheet: %d", key))
+	}
+
+	return spriteSheet
 }

@@ -7,6 +7,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/snopan/flappy-chick/drawable"
 	"github.com/snopan/flappy-chick/helper/animation"
+	"github.com/snopan/flappy-chick/helper/sprite"
 	"github.com/snopan/flappy-chick/helper/spritesheet"
 	"github.com/snopan/flappy-chick/options"
 	"github.com/snopan/flappy-chick/system"
@@ -75,9 +76,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err := animation.InitAnimationLibrary(); err != nil {
+	if err := sprite.InitSpriteLibrary(); err != nil {
 		log.Fatal(err)
 	}
+
+	animation.InitAnimationLibrary()
 
 	if err := ebiten.RunGame(NewGame()); err != nil {
 		log.Fatal(err)

@@ -8,7 +8,7 @@ import (
 
 type AnimationKey int
 
-var AnimationLibrary = map[AnimationKey]*Animation{}
+var animationLibrary = map[AnimationKey]*Animation{}
 
 const (
 	PlayerDie AnimationKey = iota
@@ -34,15 +34,18 @@ var animationData = map[AnimationKey]struct {
 	},
 }
 
-func InitAnimationLibrary() error {
+func InitAnimationLibrary() {
 	for animationKey, data := range animationData {
-		spriteSheet, ok := spritesheet.SpriteSheetLibrary[data.spriteSheetKey]
-		if !ok {
-			return fmt.Errorf("sprite sheet %d is not loaded", data.spriteSheetKey)
-		}
+		spriteSheet := spritesheet.GetSpriteSheet(data.spriteSheetKey)
+		animationLibrary[animationKey] = FromSpriteSheet(spriteSheet, data.frameDuration)
+	}
+}
 
-		AnimationLibrary[animationKey] = FromSpriteSheet(spriteSheet, data.frameDuration)
+func GetAnimation(key AnimationKey) *Animation {
+	animation, ok := animationLibrary[key]
+	if !ok {
+		panic(fmt.Sprintf("failed to get animation: %d", key))
 	}
 
-	return nil
+	return animation
 }

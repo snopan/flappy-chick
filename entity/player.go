@@ -12,17 +12,16 @@ import (
 type PlayerAnimation int
 
 func CreatePlayer(w donburi.World) {
-	entity := w.Create(
+	player := w.Entry(w.Create(
 		component.Animation,
 		component.Sprite,
 		component.PlayerTag,
 		component.Velocity,
 		transform.Transform,
-	)
+	))
 
-	e := w.Entry(entity)
 	donburi.SetValue(
-		e, component.Animation, component.AnimationData{
+		player, component.Animation, component.AnimationData{
 			CurrentSheet:         nil,
 			CurrentFrame:         1,
 			CurrentFrameDuration: 0,
@@ -30,18 +29,18 @@ func CreatePlayer(w donburi.World) {
 			ShouldChange:         true,
 		})
 
-	transform.SetWorldPosition(e, math.NewVec2(
+	transform.SetWorldPosition(player, math.NewVec2(
 		options.WindowWidth/2.0,
 		options.WindowHeight/2.0,
 	))
-	transform.SetWorldRotation(e, 0)
-	transform.SetWorldScale(e, math.NewVec2(
+	transform.SetWorldRotation(player, 0)
+	transform.SetWorldScale(player, math.NewVec2(
 		options.PlayerScale,
 		options.PlayerScale,
 	))
 
 	donburi.SetValue(
-		e, component.Velocity, component.VelocityData{
+		player, component.Velocity, component.VelocityData{
 			X: 0,
 			Y: 0,
 		})
