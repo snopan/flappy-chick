@@ -5,10 +5,10 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/snopan/flappy-chick/animation"
 	"github.com/snopan/flappy-chick/drawable"
+	"github.com/snopan/flappy-chick/helper/animation"
+	"github.com/snopan/flappy-chick/helper/spritesheet"
 	"github.com/snopan/flappy-chick/options"
-	"github.com/snopan/flappy-chick/spritesheet"
 	"github.com/snopan/flappy-chick/system"
 	"github.com/yohamta/donburi"
 )

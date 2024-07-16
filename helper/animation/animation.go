@@ -5,7 +5,7 @@ import (
 	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/snopan/flappy-chick/spritesheet"
+	"github.com/snopan/flappy-chick/helper/spritesheet"
 )
 
 type Animation struct {

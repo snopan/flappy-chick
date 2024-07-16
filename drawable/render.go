@@ -27,16 +27,23 @@ func (r *Render) Draw(w donburi.World, screen *ebiten.Image) {
 
 		size := sprite.Image.Bounds().Size()
 
-		transform := transform.Transform.Get(e)
+		// transform := transform.Transform.Get(e)
 		op := &ebiten.DrawImageOptions{}
 
 		// Center on top left so we can apply rotation and scaling
 		op.GeoM.Translate(-float64(size.X)/2, -float64(size.Y)/2)
-		op.GeoM.Rotate(transform.LocalRotation)
-		op.GeoM.Scale(transform.LocalScale.X, transform.LocalScale.Y)
+
+		// Apply rotation
+		rotation := transform.WorldRotation(e)
+		op.GeoM.Rotate(rotation)
+
+		// Apply scaling
+		scale := transform.WorldScale(e)
+		op.GeoM.Scale(scale.X, scale.Y)
 
 		// Then move the image to it's coordinates
-		op.GeoM.Translate(transform.LocalPosition.X, transform.LocalPosition.Y)
+		position := transform.WorldPosition(e)
+		op.GeoM.Translate(position.X, position.Y)
 
 		screen.DrawImage(sprite.Image, op)
 	})

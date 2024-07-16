@@ -1,7 +1,7 @@
 package component
 
 import (
-	"github.com/snopan/flappy-chick/animation"
+	"github.com/snopan/flappy-chick/helper/animation"
 	"github.com/yohamta/donburi"
 )
 

@@ -1,8 +1,8 @@
 package entity
 
 import (
-	"github.com/snopan/flappy-chick/animation"
 	"github.com/snopan/flappy-chick/component"
+	"github.com/snopan/flappy-chick/helper/animation"
 	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/features/math"
@@ -29,18 +29,17 @@ func CreatePlayer(w donburi.World) {
 			NextAnimation:        animation.PlayerFall,
 			ShouldChange:         true,
 		})
-	donburi.SetValue(
-		e, transform.Transform, transform.TransformData{
-			LocalPosition: math.NewVec2(
-				options.WindowWidth/2.0,
-				options.WindowHeight/2.0,
-			),
-			LocalRotation: 0,
-			LocalScale: math.NewVec2(
-				options.PlayerScale,
-				options.PlayerScale,
-			),
-		})
+
+	transform.SetWorldPosition(e, math.NewVec2(
+		options.WindowWidth/2.0,
+		options.WindowHeight/2.0,
+	))
+	transform.SetWorldRotation(e, 0)
+	transform.SetWorldScale(e, math.NewVec2(
+		options.PlayerScale,
+		options.PlayerScale,
+	))
+
 	donburi.SetValue(
 		e, component.Velocity, component.VelocityData{
 			X: 0,

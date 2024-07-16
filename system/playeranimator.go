@@ -1,8 +1,8 @@
 package system
 
 import (
-	"github.com/snopan/flappy-chick/animation"
 	"github.com/snopan/flappy-chick/component"
+	"github.com/snopan/flappy-chick/helper/animation"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/filter"
 )
