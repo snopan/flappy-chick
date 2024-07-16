@@ -7,6 +7,7 @@ const (
 	FlyUpSpeed      = -MaxTiltVelocity
 	PlayerScale     = 2.5
 	GroundScale     = 2.0
+	GroundSpeed     = -3.0
 	MaxTiltVelocity = 8.0
 	MaxTiltAngle    = 1.0
 )

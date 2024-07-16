@@ -24,4 +24,6 @@ func (s *Spawn) Update(w donburi.World) {
 	entity.CreatePlayer(w)
 	fmt.Print("created player")
 	s.spawned = true
+
+	entity.CreateGround(w, 0)
 }
