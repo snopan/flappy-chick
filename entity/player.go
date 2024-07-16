@@ -5,6 +5,8 @@ import (
 	"github.com/snopan/flappy-chick/component"
 	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
+	"github.com/yohamta/donburi/features/math"
+	"github.com/yohamta/donburi/features/transform"
 )
 
 type PlayerAnimation int
@@ -13,9 +15,9 @@ func CreatePlayer(w donburi.World) {
 	entity := w.Create(
 		component.Animation,
 		component.Sprite,
-		component.Transform,
 		component.PlayerTag,
 		component.Velocity,
+		transform.Transform,
 	)
 
 	e := w.Entry(entity)
@@ -28,18 +30,16 @@ func CreatePlayer(w donburi.World) {
 			ShouldChange:         true,
 		})
 	donburi.SetValue(
-		e, component.Transform, component.TransformData{
-			Position: component.PositionData{
-				X: options.WindowWidth / 2,
-				Y: options.WindowHeight / 2,
-			},
-			Scale: component.ScaleData{
-				X: options.PlayerScale,
-				Y: options.PlayerScale,
-			},
-			Rotation: component.RotationData{
-				Theta: 0,
-			},
+		e, transform.Transform, transform.TransformData{
+			LocalPosition: math.NewVec2(
+				options.WindowWidth/2.0,
+				options.WindowHeight/2.0,
+			),
+			LocalRotation: 0,
+			LocalScale: math.NewVec2(
+				options.PlayerScale,
+				options.PlayerScale,
+			),
 		})
 	donburi.SetValue(
 		e, component.Velocity, component.VelocityData{

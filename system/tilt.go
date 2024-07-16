@@ -4,6 +4,7 @@ import (
 	"github.com/snopan/flappy-chick/component"
 	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
+	"github.com/yohamta/donburi/features/transform"
 	"github.com/yohamta/donburi/filter"
 )
 
@@ -13,14 +14,14 @@ type Tilt struct {
 
 func NewTilt() *Tilt {
 	return &Tilt{
-		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Velocity, component.Transform)),
+		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Velocity, transform.Transform)),
 	}
 }
 
 func (t *Tilt) Update(w donburi.World) {
 	t.query.Each(w, func(e *donburi.Entry) {
 		velocity := component.Velocity.Get(e)
-		transform := component.Transform.Get(e)
+		transform := transform.Transform.Get(e)
 
 		currentVelocity := velocity.Y
 		if currentVelocity > 0 {
@@ -30,6 +31,6 @@ func (t *Tilt) Update(w donburi.World) {
 		}
 
 		angle := options.MaxTiltAngle / options.MaxTiltVelocity * currentVelocity
-		transform.Rotation.Theta = angle
+		transform.LocalRotation = angle
 	})
 }
