@@ -14,7 +14,7 @@ type Tilt struct {
 
 func NewTilt() *Tilt {
 	return &Tilt{
-		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Velocity, transform.Transform)),
+		query: donburi.NewQuery(filter.Contains(component.TagPlayer, component.Velocity, transform.Transform)),
 	}
 }
 

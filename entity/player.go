@@ -13,10 +13,11 @@ type PlayerAnimation int
 
 func CreatePlayer(w donburi.World) {
 	player := w.Entry(w.Create(
+		component.TagPlayer,
 		component.Animation,
 		component.Sprite,
-		component.PlayerTag,
 		component.Velocity,
+		component.RectangleCollider,
 		transform.Transform,
 	))
 
@@ -38,10 +39,4 @@ func CreatePlayer(w donburi.World) {
 		options.PlayerScale,
 		options.PlayerScale,
 	))
-
-	donburi.SetValue(
-		player, component.Velocity, component.VelocityData{
-			X: 0,
-			Y: 0,
-		})
 }

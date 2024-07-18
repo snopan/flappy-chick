@@ -15,7 +15,7 @@ type Input struct {
 
 func NewInput() *Input {
 	return &Input{
-		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Velocity)),
+		query: donburi.NewQuery(filter.Contains(component.TagPlayer, component.Velocity)),
 	}
 }
 

@@ -13,7 +13,7 @@ type PlayerAnimator struct {
 
 func NewPlayerAnimator() *PlayerAnimator {
 	return &PlayerAnimator{
-		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Animation, component.Velocity)),
+		query: donburi.NewQuery(filter.Contains(component.TagPlayer, component.Animation, component.Velocity)),
 	}
 }
 

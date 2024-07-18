@@ -13,7 +13,7 @@ type Gravity struct {
 
 func NewGravity() *Gravity {
 	return &Gravity{
-		query: donburi.NewQuery(filter.Contains(component.PlayerTag, component.Velocity)),
+		query: donburi.NewQuery(filter.Contains(component.TagPlayer, component.Velocity)),
 	}
 }
 

@@ -2,4 +2,6 @@ package component
 
 import "github.com/yohamta/donburi"
 
-var PlayerTag = donburi.NewTag()
+var TagPlayer = donburi.NewTag()
+var TagGround = donburi.NewTag()
+var TagLastGround = donburi.NewTag()
