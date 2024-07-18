@@ -14,7 +14,10 @@ import (
 
 func CreateGround(w donburi.World, x float64) {
 	parent := w.Entry(w.Create(
+		component.TagGround,
+		component.TagLastGround,
 		component.Velocity,
+		component.RectangleCollider,
 		transform.Transform,
 	))
 
@@ -29,16 +32,25 @@ func CreateGround(w donburi.World, x float64) {
 	})
 
 	currentX := 0.0
+	currentY := 0.0
 	groundLength := sprite.GetSprite(sprite.Dirt).Bounds().Size().X
 	for currentX < options.WindowWidth {
-		currentY := 0.0
+		currentY = 0.0
 		CreateGroundTile(w, parent, sprite.GetSprite(sprite.DirtLightLine), currentX, currentY, float64(groundLength))
 		currentY -= float64(groundLength) * options.GroundScale
 		CreateGroundTile(w, parent, sprite.GetSprite(sprite.Dirt), currentX, currentY, float64(groundLength))
 		currentY -= float64(groundLength) * options.GroundScale
 		CreateGroundTile(w, parent, GetRandomGroundTop(), currentX, currentY, float64(groundLength))
+		currentY -= float64(groundLength) * options.GroundScale
 		currentX += float64(groundLength) * options.GroundScale
 	}
+
+	donburi.SetValue(parent, component.RectangleCollider, component.RectangleColliderData{
+		Width:  currentX,
+		Height: -currentY,
+		Anchor: component.AnchorBottomLeft,
+	})
+
 }
 
 func CreateGroundTile(w donburi.World, parent *donburi.Entry, sprite *ebiten.Image, x, y, tileLength float64) {

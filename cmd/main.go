@@ -42,6 +42,8 @@ func NewGame() *Game {
 		system.NewInput(),
 		system.NewPlayerAnimator(),
 		system.NewTilt(),
+		system.NewSpawnGround(),
+		system.NewRemoveGround(),
 	}
 	g.drawables = []Drawable{
 		drawable.NewRender(),
