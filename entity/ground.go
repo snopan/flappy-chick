@@ -33,18 +33,18 @@ func CreateGround(w donburi.World, x float64) {
 	// Create ground columns until we get a ground section longer than windo width
 	currentX := 0.0
 	currentY := 0.0
-	groundLength := sprite.GetSprite(sprite.Dirt).Bounds().Size().X
+	groundLength := float64(sprite.GetSprite(sprite.Dirt).Bounds().Size().X)
 	for currentX < options.WindowWidth {
 
 		// For each ground column we need to create mulitple ground tile
 		currentY = 0.0
-		CreateGroundTile(w, parent, sprite.GetSprite(sprite.DirtLightLine), currentX, currentY, float64(groundLength))
-		currentY -= float64(groundLength) * options.GroundScale
-		CreateGroundTile(w, parent, sprite.GetSprite(sprite.Dirt), currentX, currentY, float64(groundLength))
-		currentY -= float64(groundLength) * options.GroundScale
-		CreateGroundTile(w, parent, GetRandomGroundTop(), currentX, currentY, float64(groundLength))
-		currentY -= float64(groundLength) * options.GroundScale
-		currentX += float64(groundLength) * options.GroundScale
+		CreateGroundTile(w, parent, sprite.GetSprite(sprite.DirtLightLine), currentX, currentY, groundLength)
+		currentY -= groundLength * options.GroundScale
+		CreateGroundTile(w, parent, sprite.GetSprite(sprite.Dirt), currentX, currentY, groundLength)
+		currentY -= groundLength * options.GroundScale
+		CreateGroundTile(w, parent, GetRandomGroundTop(), currentX, currentY, groundLength)
+		currentY -= groundLength * options.GroundScale
+		currentX += groundLength * options.GroundScale
 	}
 
 	// Lastly set the collider size now that we know how large the ground section is
