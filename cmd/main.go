@@ -47,6 +47,7 @@ func NewGame() *Game {
 	}
 	g.drawables = []Drawable{
 		drawable.NewRender(),
+		// drawable.NewRenderCollider(),
 	}
 	return g
 }
