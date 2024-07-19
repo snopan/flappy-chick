@@ -36,5 +36,6 @@ func (r *RemoveGround) Update(w donburi.World) {
 
 		// But if the ground is completely off screen then remove it
 		transform.RemoveChildrenRecursive(e)
+		e.Remove()
 	})
 }
