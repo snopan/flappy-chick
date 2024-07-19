@@ -11,6 +11,9 @@ import (
 	"github.com/yohamta/donburi/features/transform"
 )
 
+// CreatePipe would create a pipe that would be positoned on the very
+// right passed the edge of window and the pipes would have a hole
+// at the provided centerY
 func CreatePipe(w donburi.World, centerY float64) {
 
 	// Create the pipe parent where it's position is center of pipe
@@ -18,23 +21,25 @@ func CreatePipe(w donburi.World, centerY float64) {
 		component.Velocity,
 		transform.Transform,
 	))
-	tempX := options.WindowWidth - 100.0
-	transform.SetWorldPosition(pipe, math.NewVec2(tempX, centerY))
+	transform.SetWorldPosition(pipe, math.NewVec2(options.WindowWidth, centerY))
 	component.SetVelocity(pipe, options.PipeSpeed, 0.0)
+
+	pipeWidth := float64(sprite.GetSprite(sprite.PipeMiddle).Bounds().Size().X)
 
 	// Have a collider in the center so we can check when player pas ses the pipe
 	center := w.Entry(w.Create(
 		component.RectangleCollider,
 		transform.Transform,
 	))
-	component.SetRectangleCollider(center, 0.0, options.PipeGap, component.AnchorCenter)
+	transform.SetWorldPosition(center, math.NewVec2(pipeWidth*options.PipeScale/2, 0.0))
 	transform.AppendChild(pipe, center, false)
+	component.SetRectangleCollider(center, 0.0, options.PipeGap, component.AnchorCenter)
 
-	CreatePipeSections(w, pipe, -options.PipeGap/2.0, false)
-	CreatePipeSections(w, pipe, options.PipeGap/2.0, true)
+	CreatePipeSections(w, pipe, -options.PipeGap/2.0, pipeWidth, false)
+	CreatePipeSections(w, pipe, options.PipeGap/2.0, pipeWidth, true)
 }
 
-func CreatePipeSections(w donburi.World, pipe *donburi.Entry, startY float64, buildBottom bool) {
+func CreatePipeSections(w donburi.World, pipe *donburi.Entry, startY, pipeWidth float64, buildBottom bool) {
 
 	// Create the parent for pipe section
 	sectionParent := w.Entry(w.Create(
@@ -47,9 +52,11 @@ func CreatePipeSections(w donburi.World, pipe *donburi.Entry, startY float64, bu
 	// Define which direction the pipe should be built and what edge sprite to use
 	buildDirect := -1.0
 	edgeSprite := sprite.GetSprite(sprite.PipeBottom)
+	colliderAnchor := component.AnchorBottomLeft
 	if buildBottom {
 		buildDirect = 1.0
 		edgeSprite = sprite.GetSprite(sprite.PipeTop)
+		colliderAnchor = component.AnchorTopLeft
 	}
 
 	// Then start building the pipe sections
@@ -69,9 +76,14 @@ func CreatePipeSections(w donburi.World, pipe *donburi.Entry, startY float64, bu
 			transform.Transform,
 		))
 		component.SetSprite(pipeSection, pipeSprite)
-		transform.SetWorldPosition(pipeSection, math.NewVec2(0.0, currentY))
+		transform.SetWorldPosition(pipeSection, math.NewVec2(
+			pipeWidth*options.PipeScale/2.0,
+			currentY+buildDirect*pipeSectionHeight*options.PipeScale/2.0,
+		))
 		transform.SetWorldScale(pipeSection, math.NewVec2(options.PipeScale, options.PipeScale))
 		transform.AppendChild(sectionParent, pipeSection, false)
 		currentY += buildDirect * pipeSectionHeight * options.PipeScale
 	}
+
+	component.SetRectangleCollider(sectionParent, pipeWidth*options.PipeScale, stdmath.Abs(currentY), colliderAnchor)
 }
