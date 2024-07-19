@@ -13,6 +13,9 @@ import (
 )
 
 func CreateGround(w donburi.World, x float64) {
+
+	// First create ground parent and set it's position, all the following ground tiles
+	// will base it's position from this and we can apply velocity to just the parent
 	parent := w.Entry(w.Create(
 		component.TagGround,
 		component.TagLastGround,
@@ -20,21 +23,20 @@ func CreateGround(w donburi.World, x float64) {
 		component.RectangleCollider,
 		transform.Transform,
 	))
-
-	transform.SetWorldPosition(parent, math.NewVec2(
-		x,
-		options.WindowHeight,
-	))
-
+	transform.SetWorldPosition(parent, math.NewVec2(x, options.WindowHeight))
 	donburi.SetValue(parent, component.Velocity, component.VelocityData{
 		X: options.GroundSpeed,
 		Y: 0,
 	})
 
+	// For each ground column we need to create mulitple ground tile
+	// Create ground columns until we get a ground section longer than windo width
 	currentX := 0.0
 	currentY := 0.0
 	groundLength := sprite.GetSprite(sprite.Dirt).Bounds().Size().X
 	for currentX < options.WindowWidth {
+
+		// For each ground column we need to create mulitple ground tile
 		currentY = 0.0
 		CreateGroundTile(w, parent, sprite.GetSprite(sprite.DirtLightLine), currentX, currentY, float64(groundLength))
 		currentY -= float64(groundLength) * options.GroundScale
@@ -45,6 +47,7 @@ func CreateGround(w donburi.World, x float64) {
 		currentX += float64(groundLength) * options.GroundScale
 	}
 
+	// Lastly set the collider size now that we know how large the ground section is
 	donburi.SetValue(parent, component.RectangleCollider, component.RectangleColliderData{
 		Width:  currentX,
 		Height: -currentY,
