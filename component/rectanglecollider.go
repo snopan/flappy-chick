@@ -7,8 +7,12 @@ type Anchor int
 const (
 	AnchorBottomLeft Anchor = iota
 	AnchorBottomRight
+	AnchorBottom
 	AnchorTopLeft
 	AnchorTopRight
+	AnchorTop
+	AnchorLeft
+	AnchorRight
 	AnchorCenter
 )
 
@@ -24,10 +28,18 @@ func (r *RectangleColliderData) GetTopLeft(AnchorX, AnchorY float64) (float64, f
 		return AnchorX, AnchorY - r.Height
 	case AnchorBottomRight:
 		return AnchorX - r.Width, AnchorY - r.Height
+	case AnchorBottom:
+		return AnchorX - r.Width/2.0, AnchorY - r.Height
 	case AnchorTopLeft:
 		return AnchorX, AnchorY
 	case AnchorTopRight:
 		return AnchorX - r.Width, AnchorY
+	case AnchorTop:
+		return AnchorX - r.Width/2.0, AnchorY
+	case AnchorLeft:
+		return AnchorX, AnchorY - r.Height/2.0
+	case AnchorRight:
+		return AnchorX - r.Width, AnchorY - r.Height/2.0
 	case AnchorCenter:
 		return AnchorX - r.Width/2.0, AnchorY - r.Height/2.0
 	}
@@ -40,10 +52,18 @@ func (r *RectangleColliderData) GetBottomRight(AnchorX, AnchorY float64) (float6
 		return AnchorX + r.Width, AnchorY
 	case AnchorBottomRight:
 		return AnchorX, AnchorY
+	case AnchorBottom:
+		return AnchorX + r.Width/2.0, AnchorY
 	case AnchorTopLeft:
 		return AnchorX + r.Width, AnchorY + r.Height
 	case AnchorTopRight:
 		return AnchorX, AnchorY + r.Height
+	case AnchorTop:
+		return AnchorX + r.Width/2.0, AnchorY + r.Height
+	case AnchorLeft:
+		return AnchorX + r.Width, AnchorY + r.Height/2.0
+	case AnchorRight:
+		return AnchorX, AnchorY + r.Height/2.0
 	case AnchorCenter:
 		return AnchorX + r.Width/2.0, AnchorY + r.Height/2.0
 	}
