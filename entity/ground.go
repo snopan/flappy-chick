@@ -24,10 +24,7 @@ func CreateGround(w donburi.World, x float64) {
 		transform.Transform,
 	))
 	transform.SetWorldPosition(parent, math.NewVec2(x, options.WindowHeight))
-	donburi.SetValue(parent, component.Velocity, component.VelocityData{
-		X: options.GroundSpeed,
-		Y: 0,
-	})
+	component.SetVelocity(parent, options.GroundSpeed, 0.0)
 
 	// For each ground column we need to create mulitple ground tile
 	// Create ground columns until we get a ground section longer than windo width
