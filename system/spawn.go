@@ -2,7 +2,6 @@ package system
 
 import (
 	"github.com/snopan/flappy-chick/entity"
-	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
 )
 
@@ -21,6 +20,5 @@ func (s *Spawn) Update(w donburi.World) {
 		return
 	}
 	entity.CreatePlayer(w)
-	entity.CreatePipe(w, options.WindowHeight/2.0)
 	s.spawned = true
 }

@@ -14,7 +14,7 @@ import (
 // CreatePipe would create a pipe that would be positoned on the very
 // right passed the edge of window and the pipes would have a hole
 // at the provided centerY
-func CreatePipe(w donburi.World, centerY float64) *donburi.Entry {
+func CreatePipe(w donburi.World, leftX, centerY float64) *donburi.Entry {
 	pipeWidth := float64(sprite.GetSprite(sprite.PipeMiddle).Bounds().Size().X)
 
 	// Create the pipe parent where it's position is center of pipe
@@ -24,7 +24,7 @@ func CreatePipe(w donburi.World, centerY float64) *donburi.Entry {
 		transform.Transform,
 	))
 	transform.SetWorldPosition(pipe, math.NewVec2(
-		options.WindowWidth+pipeWidth*options.PipeScale/2,
+		leftX+pipeWidth*options.PipeScale/2,
 		centerY,
 	))
 	component.SetRectangleCollider(pipe, pipeWidth*options.PipeScale, options.WindowHeight, component.AnchorCenter)
