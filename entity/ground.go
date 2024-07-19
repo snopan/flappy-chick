@@ -64,16 +64,11 @@ func CreateGroundTile(w donburi.World, parent *donburi.Entry, sprite *ebiten.Ima
 	donburi.SetValue(tile, component.Sprite, component.SpriteData{
 		Image: sprite,
 	})
-	donburi.SetValue(tile, transform.Transform, transform.TransformData{
-		LocalPosition: math.NewVec2(
-			x+tileLength*options.GroundScale/2.0,
-			y-tileLength*options.GroundScale/2.0,
-		),
-		LocalScale: math.NewVec2(
-			options.GroundScale,
-			options.GroundScale,
-		),
-	})
+	transform.SetWorldPosition(tile, math.NewVec2(
+		x+tileLength*options.GroundScale/2.0,
+		y-tileLength*options.GroundScale/2.0,
+	))
+	transform.SetWorldScale(tile, math.NewVec2(options.GroundScale, options.GroundScale))
 	transform.AppendChild(parent, tile, false)
 }
 
