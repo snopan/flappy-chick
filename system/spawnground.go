@@ -20,7 +20,8 @@ func NewSpawnGround() *SpawnGround {
 
 func (s *SpawnGround) Update(w donburi.World) {
 	if s.query.Count(w) == 0 {
-		entity.CreateGround(w, 0.0)
+		e := entity.CreateGround(w, 0.0)
+		e.AddComponent(component.TagLastGround)
 	}
 
 	s.query.Each(w, func(e *donburi.Entry) {
@@ -35,7 +36,8 @@ func (s *SpawnGround) Update(w donburi.World) {
 
 		// Create another ground to the right of it
 		bottomRightX, _ := collider.GetBottomRight(position.X, position.Y)
-		entity.CreateGround(w, bottomRightX)
+		newLast := entity.CreateGround(w, bottomRightX)
+		newLast.AddComponent(component.TagLastGround)
 
 		// This ground is no longer the last one
 		e.RemoveComponent(component.TagLastGround)

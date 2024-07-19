@@ -13,13 +13,12 @@ import (
 	"github.com/yohamta/donburi/features/transform"
 )
 
-func CreateGround(w donburi.World, x float64) {
+func CreateGround(w donburi.World, x float64) *donburi.Entry {
 
 	// First create ground parent and set it's position, all the following ground tiles
 	// will base it's position from this and we can apply velocity to just the parent
 	parent := w.Entry(w.Create(
 		component.TagGround,
-		component.TagLastGround,
 		component.Velocity,
 		component.RectangleCollider,
 		transform.Transform,
@@ -47,6 +46,8 @@ func CreateGround(w donburi.World, x float64) {
 
 	// Lastly set the collider size now that we know how large the ground section is
 	component.SetRectangleCollider(parent, currentX, stdmath.Abs(currentY), component.AnchorBottomLeft)
+
+	return parent
 }
 
 func CreateGroundTile(w donburi.World, parent *donburi.Entry, sprite *ebiten.Image, x, y, tileLength float64) {
