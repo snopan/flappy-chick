@@ -33,6 +33,7 @@ func (r *Render) Draw(w donburi.World, screen *ebiten.Image) {
 		scale := transform.WorldScale(e)
 		size := sprite.Image.Bounds().Size()
 
+		// Dont render if it's out of frame
 		if !SpriteInFrame(math.NewVec2(float64(size.X), float64(size.Y)), position, scale) {
 			return
 		}
