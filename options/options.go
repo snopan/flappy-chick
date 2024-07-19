@@ -8,9 +8,9 @@ const (
 	PlayerScale     = 2.5
 	GroundScale     = 2.0
 	GroundSpeed     = -3.0
-	PipeScale       = 2.0
+	PipeScale       = 4.0
 	PipeSpeed       = -3.0
-	PipeGap         = 200.0
+	PipeGap         = 150.0
 	MaxTiltVelocity = 8.0
 	MaxTiltAngle    = 1.0
 )
