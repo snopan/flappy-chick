@@ -45,12 +45,7 @@ func CreateGround(w donburi.World, x float64) {
 	}
 
 	// Lastly set the collider size now that we know how large the ground section is
-	donburi.SetValue(parent, component.RectangleCollider, component.RectangleColliderData{
-		Width:  currentX,
-		Height: -currentY,
-		Anchor: component.AnchorBottomLeft,
-	})
-
+	component.SetRectangleCollider(parent, currentX, -currentY, component.AnchorBottomLeft)
 }
 
 func CreateGroundTile(w donburi.World, parent *donburi.Entry, sprite *ebiten.Image, x, y, tileLength float64) {

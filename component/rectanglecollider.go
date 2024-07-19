@@ -51,3 +51,11 @@ func (r *RectangleColliderData) GetBottomRight(AnchorX, AnchorY float64) (float6
 }
 
 var RectangleCollider = donburi.NewComponentType[RectangleColliderData]()
+
+func SetRectangleCollider(e *donburi.Entry, width, height float64, anchor Anchor) {
+	donburi.SetValue(e, RectangleCollider, RectangleColliderData{
+		Width:  width,
+		Height: height,
+		Anchor: anchor,
+	})
+}
