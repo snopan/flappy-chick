@@ -62,8 +62,8 @@ func SpriteInFrame(size, position, scale math.Vec2) bool {
 		position.Y+size.Y/2*scale.Y,
 	)
 
-	topLeftInWindow := 0.0 <= topLeft.X && topLeft.X <= options.WindowWidth && 0.0 <= topLeft.Y && topLeft.Y <= options.WindowHeight
-	bottomRightInWindow := 0.0 <= bottomRight.X && bottomRight.X <= options.WindowWidth && 0.0 <= bottomRight.Y && bottomRight.Y <= options.WindowHeight
+	topLeftInWindow := (0.0 <= topLeft.X && topLeft.X <= options.WindowWidth) || (0.0 <= topLeft.Y && topLeft.Y <= options.WindowHeight)
+	bottomRightInWindow := (0.0 <= bottomRight.X && bottomRight.X <= options.WindowWidth) || (0.0 <= bottomRight.Y && bottomRight.Y <= options.WindowHeight)
 
 	return topLeftInWindow || bottomRightInWindow
 }
