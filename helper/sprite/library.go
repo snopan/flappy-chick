@@ -18,6 +18,9 @@ const (
 	Dirt
 	DirtLightLine
 	DirtDarkLine
+	PipeTop
+	PipeMiddle
+	PipeBottom
 )
 
 var spriteData = map[SpriteKey]struct {
@@ -54,6 +57,21 @@ var spriteData = map[SpriteKey]struct {
 		spriteSheetKey: spritesheet.Ground,
 		row:            1,
 		col:            2,
+	},
+	PipeTop: {
+		spriteSheetKey: spritesheet.Pipes,
+		row:            0,
+		col:            0,
+	},
+	PipeMiddle: {
+		spriteSheetKey: spritesheet.Pipes,
+		row:            1,
+		col:            0,
+	},
+	PipeBottom: {
+		spriteSheetKey: spritesheet.Pipes,
+		row:            2,
+		col:            0,
 	},
 }
 
