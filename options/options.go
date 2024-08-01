@@ -16,3 +16,11 @@ const (
 	MaxTiltVelocity              = 8.0
 	MaxTiltAngle                 = 1.0
 )
+
+const (
+	LayerBackground int = iota
+	LayerPipe
+	LayerGround
+	LayerPlayer
+	LayerUI
+)

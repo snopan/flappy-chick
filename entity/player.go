@@ -29,7 +29,7 @@ func CreatePlayer(w donburi.World) {
 			NextAnimation:        animation.PlayerFall,
 			ShouldChange:         true,
 		})
-
+	component.SetSprite(player, nil, options.LayerPlayer)
 	transform.SetWorldPosition(player, math.NewVec2(
 		options.WindowWidth/2.0,
 		options.WindowHeight/2.0,

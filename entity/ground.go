@@ -55,7 +55,7 @@ func CreateGroundTile(w donburi.World, parent *donburi.Entry, sprite *ebiten.Ima
 		component.Sprite,
 		transform.Transform,
 	))
-	component.SetSprite(tile, sprite)
+	component.SetSprite(tile, sprite, options.LayerGround)
 	transform.SetWorldPosition(tile, math.NewVec2(
 		x+tileLength*options.GroundScale/2.0,
 		y-tileLength*options.GroundScale/2.0,

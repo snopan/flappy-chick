@@ -72,7 +72,7 @@ func CreatePipeSections(w donburi.World, pipe *donburi.Entry, startY, pipeWidth 
 			component.Sprite,
 			transform.Transform,
 		))
-		component.SetSprite(pipeSection, pipeSprite)
+		component.SetSprite(pipeSection, pipeSprite, options.LayerPipe)
 		transform.SetWorldPosition(pipeSection, math.NewVec2(
 			0.0,
 			currentY+buildDirect*pipeSectionHeight*options.PipeScale/2.0,
