@@ -45,10 +45,11 @@ func NewGame() *Game {
 		system.NewSpawnGround(),
 		system.NewRemoveGround(),
 		system.NewSpawnPipe(),
+		system.NewScoring(),
 	}
 	g.drawables = []Drawable{
 		drawable.NewRender(),
-		// drawable.NewRenderCollider(),
+		drawable.NewRenderCollider(),
 	}
 	return g
 }

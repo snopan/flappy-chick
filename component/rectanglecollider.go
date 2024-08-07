@@ -70,6 +70,23 @@ func (r *RectangleColliderData) GetBottomRight(AnchorX, AnchorY float64) (float6
 	panic("invalid anchor")
 }
 
+func IsOverlap(c1, c2 *RectangleColliderData, ax1, ay1, ax2, ay2 float64) bool {
+	l1x, l1y := c1.GetTopLeft(ax1, ay1)
+	r1x, r1y := c1.GetBottomRight(ax1, ay1)
+	l2x, l2y := c2.GetTopLeft(ax2, ay2)
+	r2x, r2y := c2.GetBottomRight(ax2, ay2)
+	if l1x > r2x || l2x > r1x {
+		return false
+	}
+
+	// If one rectangle is above the other
+	if r1y > l2y || r2y > l1y {
+		return false
+	}
+
+	return true
+}
+
 var RectangleCollider = donburi.NewComponentType[RectangleColliderData]()
 
 func SetRectangleCollider(e *donburi.Entry, width, height float64, anchor Anchor) {

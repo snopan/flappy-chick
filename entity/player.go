@@ -3,6 +3,7 @@ package entity
 import (
 	"github.com/snopan/flappy-chick/component"
 	"github.com/snopan/flappy-chick/helper/animation"
+	"github.com/snopan/flappy-chick/helper/sprite"
 	"github.com/snopan/flappy-chick/options"
 	"github.com/yohamta/donburi"
 	"github.com/yohamta/donburi/features/math"
@@ -12,12 +13,15 @@ import (
 type PlayerAnimation int
 
 func CreatePlayer(w donburi.World) {
+	playerWidth := float64(sprite.GetSprite(sprite.PipeMiddle).Bounds().Size().X)
+
 	player := w.Entry(w.Create(
 		component.TagPlayer,
 		component.Animation,
 		component.Sprite,
 		component.Velocity,
 		component.RectangleCollider,
+		component.Scoring,
 		transform.Transform,
 	))
 
@@ -29,6 +33,14 @@ func CreatePlayer(w donburi.World) {
 			NextAnimation:        animation.PlayerFall,
 			ShouldChange:         true,
 		})
+	donburi.SetValue(
+		player, component.Scoring, component.ScoringData{
+			Score:       0,
+			PassingPipe: false,
+		},
+	)
+
+	component.SetRectangleCollider(player, pipeWidth*options.PipeScale, options.WindowHeight, component.AnchorCenter)
 	component.SetSprite(player, nil, options.LayerPlayer)
 	transform.SetWorldPosition(player, math.NewVec2(
 		options.WindowWidth/2.0,
@@ -39,4 +51,5 @@ func CreatePlayer(w donburi.World) {
 		options.PlayerScale,
 		options.PlayerScale,
 	))
+
 }

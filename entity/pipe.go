@@ -21,6 +21,7 @@ func CreatePipe(w donburi.World, leftX, centerY float64) *donburi.Entry {
 	pipe := w.Entry(w.Create(
 		component.Velocity,
 		component.RectangleCollider,
+		component.TagPipe,
 		transform.Transform,
 	))
 	transform.SetWorldPosition(pipe, math.NewVec2(
@@ -41,6 +42,7 @@ func CreatePipeSections(w donburi.World, pipe *donburi.Entry, startY, pipeWidth 
 	// Create the parent for pipe section
 	sectionParent := w.Entry(w.Create(
 		component.RectangleCollider,
+		component.TagPipeSection,
 		transform.Transform,
 	))
 	transform.SetWorldPosition(sectionParent, math.NewVec2(0.0, startY))
